@@ -9,8 +9,9 @@ import categoryRoutes from './app/routes/categoryRoutes.js';
 
 import bookRoutes from './app/routes/bookRoutes.js';
 
-import userRoutes from './app/routes/userRoutes.js'
+import userRoutes from './app/routes/userRoutes.js';
 
+import emprutRoutes from './app/routes/emprutRoutes.js';
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -37,13 +38,17 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
 
-app.use('/api/users', userRoutes)
+app.use('/api/users', userRoutes);
 
-app.use('/api/books', bookRoutes)
+
+
+app.use('/api/books', bookRoutes);
+
 
 app.use('/api/categories', categoryRoutes);
 
 
+app.use('/api/emprut', emprutRoutes);
 
 app.get('/', (req, res) => {
   res.render('components/home', { name: 'Hamza' })
