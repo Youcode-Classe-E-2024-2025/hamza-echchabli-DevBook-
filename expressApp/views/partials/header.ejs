@@ -1,0 +1,17 @@
+<header class="header">
+  <div class="logo">📘 DevBook</div>
+  <nav class="nav">
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/explore">Explore</a>
+  </nav>
+  <div class="auth-links">
+    <% if (typeof user !== 'undefined' && user) { %>
+      <span class="user-greeting">Hello, <%= user.name %></span>
+      <a href="/profile">Profile</a>
+      <a href="#" id="logout-btn">Logout</a>
+    <% } else { %>
+      <a href="/auth">Login / Register</a>
+    <% } %>
+  </div>
+</header>

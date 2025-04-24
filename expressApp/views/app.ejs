@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title : 'DevBook - Developer Social Platform' %></title>
+  <link rel="stylesheet" href="/css/home.css">
+  <!-- Allow for page-specific styles -->
+  <% if(typeof extraStyles !== 'undefined') { %>
+    <%- extraStyles %>
+  <% } %>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">📘 DevBook</div>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/explore">Explore</a>
+    </nav>
+    <div class="auth-links">
+      <% if (typeof user !== 'undefined' && user) { %>
+        <span class="user-greeting">Hello, <%= user.name %></span>
+        <a href="/profile">Profile</a>
+        <a href="#" id="logout-btn">Logout</a>
+      <% } else { %>
+        <a href="/auth">Login / Register</a>
+      <% } %>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <%- body %>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; <%= new Date().getFullYear() %> DevBook - Connect with developers worldwide</p>
+      <div class="footer-links">
+        <a href="/about">About</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/contact">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Common Scripts -->
+  <script>
+    // Check authentication status on every page
+    document.addEventListener('DOMContentLoaded', () => {
+      // Handle logout functionality
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          window.location.href = '/';
+        });
+      }
+    });
+  </script>
+  
+  <!-- Allow for page-specific scripts -->
+  <% if(typeof extraScripts !== 'undefined') { %>
+    <%- extraScripts %>
+  <% } %>
+</body>
+</html>

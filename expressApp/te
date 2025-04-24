@@ -1,0 +1,26 @@
+Response { type: "basic", url: "http://localhost:5000/api/users/register", redirected: false, status: 201, ok: true, statusText: "Created", headers: Headers(8), body: ReadableStream, bodyUsed: false }
+​
+body: ReadableStream { locked: true }
+​​
+locked: true
+​​
+<prototype>: ReadableStreamPrototype { cancel: cancel(), getReader: getReader(), pipeThrough: pipeThrough(), … }
+​
+bodyUsed: true
+​
+headers: Headers(8) { "access-control-allow-origin" → "*", connection → "keep-alive", "content-length" → "105", … }
+​
+ok: true
+​
+redirected: false
+​
+status: 201
+​
+statusText: "Created"
+​
+type: "basic"
+​
+url: "http://localhost:5000/api/users/register"
+​
+<prototype>: ResponsePrototype { clone: clone(), arrayBuffer: arrayBuffer(), blob: blob(), … }
+auth.js:96:17

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevBook - Home</title>
+  <link rel="stylesheet" href="/home.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">📘 DevBook</div>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+    </nav>
+    <div class="auth-links">
+
+      <a href="/auth">login</a> 
+      
+    </div>
+  </header>
+
+  <section class="controls">
+    <input type="text" class="search-input" placeholder="Search books..." />
+    
+    <select class="filter-select">
+      <option value="">All Categories</option>
+      <option value="Programming">Programming</option>
+      <option value="Design">Design</option>
+      <option value="Architecture">Architecture</option>
+    </select>
+
+    <select class="filter-select">
+      <option value="">All Status</option>
+      <option value="read">Read</option>
+      <option value="reading">In Progress</option>
+      <option value="to-read">To Read</option>
+    </select>
+  </section>
+
+  <!-- MAIN BOOK GRID -->
+  <main class="book-grid">
+    <!-- Example book card -->
+    <div class="book-card">
+      <h3>Clean Code</h3>
+      <p>Category: Programming</p>
+      <p>Status: Reading</p>
+    </div>
+
+    <div class="book-card">
+      <h3>Don't Make Me Think</h3>
+      <p>Category: Design</p>
+      <p>Status: Read</p>
+    </div>
+
+    <!-- More cards here... -->
+  </main>
+</body>
+</html>
