@@ -13,7 +13,9 @@ export const createUser = async (name, email, password, role) => {
     'INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4) RETURNING *',
     [name, email, hashedPassword, role]
   );
-  return result.rows[0];
+  const user = result.rows[0];
+  const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
+  return {user , token};
 };
 
 // Login user

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile - Loaned Books</title>
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <section class="profile">
+    <h2>Your Loaned Books</h2>
+    
+    <div class="loaned-books">
+      <% loanedBooks.forEach(book => { %>
+        <div class="loaned-book">
+          <h3><%= book.title %></h3>
+          <p><strong>Category:</strong> <%= book.categorie_id %></p> <!-- Modify if needed to display category -->
+          <p><strong>Status:</strong> 
+            <select class="status-select" data-book-id="<%= book.id %>">
+              <option value="lus" <% if (book.status === 'lus') { %>selected<% } %>>Read</option>
+              <option value="a lire" <% if (book.status === 'a lire') { %>selected<% } %>>To Read</option>
+              <option value="" <% if (book.status === '') { %>selected<% } %>>Not Specified</option>
+            </select>
+          </p>
+
+          <!-- Return book button -->
+          <button class="return-book-button" data-book-id="<%= book.id %>">Return</button>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+
+  <script>
+    const UToken = localStorage.getItem('token');
+    
+    // Handle status update
+    document.querySelectorAll('.status-select').forEach(select => {
+      select.addEventListener('change', async (event) => {
+        const bookId = event.target.getAttribute('data-book-id');
+        const status = event.target.value;
+        
+        const response = await fetch(`/api/emprut/update-status`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${UToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ book_id: bookId, status }),
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          alert('Book status updated');
+        } else {
+          alert(data.error || 'Failed to update status');
+        }
+      });
+    });
+
+    // Handle book return
+    document.querySelectorAll('.return-book-button').forEach(button => {
+      button.addEventListener('click', async (event) => {
+        const bookId = event.target.getAttribute('data-book-id');
+        
+        const response = await fetch(`/api/emprut/return`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${UToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ book_id: bookId }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert('Book returned successfully');
+          location.reload();  // Reload the page to reflect the changes
+        } else {
+          alert(data.error || 'Failed to return book');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

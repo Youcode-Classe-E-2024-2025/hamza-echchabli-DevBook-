@@ -1,4 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevBook - Home</title>
+  <link rel="stylesheet" href="/home.css" />
+</head>
+<body>
+
+<%- include('../partials/header') %>
+
+<main class="content">
+
+  <!-- Create Category Form -->
+  <section id="create-category">
+    <h2>Create Category</h2>
+    <form id="category-form">
+      <label for="category-name">Category Name</label>
+      <input type="text" id="category-name" name="category-name" placeholder="Enter category name" required />
+      <button type="submit">Create Category</button>
+    </form>
+    <div id="category-result"></div>
+  </section>
+
+  
+  <section id="create-book">
+    <h2>Create Book</h2>
+    <form id="book-form" enctype="multipart/form-data">
+      <label for="book-title">Book Title</label>
+      <input type="text" id="book-title" name="book-title" placeholder="Enter book title" required />
+      
+      <label for="book-description">Description</label>
+      <textarea id="book-description" name="book-description" placeholder="Enter book description" required></textarea>
+  
+      <label for="book-image">Image</label>
+      <input type="file" id="book-image" name="book-image" required />
+  
+      <label for="book-category">Category</label>
+      <select id="book-category" name="book-category" required>
+        <!-- Categories will be populated here -->
+      </select>
+  
+      <button type="submit">Create Book</button>
+    </form>
+    <div id="book-result"></div>
+  </section>
+  
+
+  
+ 
+
+</main>
+
+<script src="js/app.js"></script>
+<script src="js/dash.js"></script>
 
 
-
-<h1>dash</h1>
+</body>
+</html>

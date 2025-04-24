@@ -1,7 +1,10 @@
 
+    // localStorage.clear();
     document.addEventListener('DOMContentLoaded', () => {
       // Check if already logged in
       const token = localStorage.getItem('token');
+      console.log(token);
+      
       if (token) {
         window.location.href = '/dashboard';
         return;
@@ -53,11 +56,11 @@
           }
           
           
-          localStorage.setItem('token', data.data.token);
+          localStorage.setItem('token', data.token);
           localStorage.setItem('user', JSON.stringify({
-            id: data.id,
-            name: data.name,
-            email: data.email
+            id: data.user.id,
+            name: data.user.name,
+            email: data.user.email
           }));
           
           
@@ -71,6 +74,7 @@
       
       document.getElementById('register-form').addEventListener('submit', async (e) => {
         e.preventDefault();
+        
         
         const name = document.getElementById('register-name').value;
         const email = document.getElementById('register-email').value;
@@ -102,17 +106,19 @@
         
         console.log(response);
 
-        console.log(data.data);
+        console.log(data.user);
         
         
+        //  console.log(data.name);
+
         
         
-        
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('token', data.user.token);
         localStorage.setItem('user', JSON.stringify({
-            id: data.id,
-            name: data.name,
-            email: data.email
+            id: data.user.id,
+            name: data.user.name,
+            email: data.user.email,
+            role : data.user.role
         }));
           
           window.location.href = '/dashboard';

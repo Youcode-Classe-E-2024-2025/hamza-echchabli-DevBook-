@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= book.title %> - Details</title>
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <section class="book-details">
+    <h1><%= book.title %></h1>
+    <img src="/<%= book.image %>" alt="<%= book.title %>" style="max-width: 100%; height: 300px; object-fit: cover;" />
+    <p><strong>Description:</strong> <%= book.description %></p>
+    <p><strong>Category:</strong> <%= book.categorie_id %></p>  <!-- Modify based on how you fetch categories -->
+    
+    <!-- Button to loan the book -->
+    <button id="loan-book-button">Loan this Book</button>
+  </section>
+
+  <script>
+    const UToken = localStorage.getItem('token');
+    const bookId = "<%= book.id %>";  // Dynamically injected book ID
+    
+    // Loan the book
+    async function loanBook() {
+      const userId = getUserIdFromToken(UToken);  // Assuming a function to extract user ID from token
+
+      const response = await fetch(`/api/emprut`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${UToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_id: userId, book_id: bookId })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('You have successfully loaned this book!');
+        window.location.href = '/'; // Optionally redirect after loan
+      } else {
+        alert(data.error || 'Failed to loan the book');
+      }
+    }
+
+    // Add event listener to the loan button
+    document.getElementById('loan-book-button').addEventListener('click', loanBook);
+    
+    // Utility to extract user ID from the token
+    function getUserIdFromToken(token) {
+      if (!token) return null;
+      
+      const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
+      return payload.user_id; // Assuming the token contains the user_id field
+    }
+  </script>
+</body>
+</html>

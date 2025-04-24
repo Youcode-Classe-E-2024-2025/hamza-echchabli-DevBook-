@@ -7,19 +7,8 @@
   <link rel="stylesheet" href="/home.css" />
 </head>
 <body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo">📘 DevBook</div>
-    <nav class="nav">
-      <a href="/">Home</a>
-      <a href="/dashboard">Dashboard</a>
-    </nav>
-    <div class="auth-links">
 
-      <a href="/auth">login</a> 
-      
-    </div>
-  </header>
+  <%- include('../partials/header') %>
 
   <section class="controls">
     <input type="text" class="search-input" placeholder="Search books..." />
@@ -41,20 +30,19 @@
 
   <!-- MAIN BOOK GRID -->
   <main class="book-grid">
-    <!-- Example book card -->
-    <div class="book-card">
-      <h3>Clean Code</h3>
-      <p>Category: Programming</p>
-      <p>Status: Reading</p>
-    </div>
-
-    <div class="book-card">
-      <h3>Don't Make Me Think</h3>
-      <p>Category: Design</p>
-      <p>Status: Read</p>
-    </div>
-
-    <!-- More cards here... -->
+    <!-- Books will be inserted here by JavaScript -->
   </main>
+
+
+  <section class="pagination">
+    <button class="prev-page">Previous</button>
+    <span class="page-info">Page 1 of <span id="total-pages">?</span></span>
+    <button class="next-page">Next</button>
+  </section>
+  
+
+  <script src="js/app.js"></script>
+  <script src="js/home.js"></script>
+
 </body>
 </html>
